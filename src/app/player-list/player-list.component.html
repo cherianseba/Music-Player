@@ -1,0 +1,24 @@
+<div class="play-list-container">
+  <mat-toolbar color="primary" class="play-list-header">Audio Play List</mat-toolbar>
+
+  <div class="play-list-content">
+    <mat-card *ngFor="let song of songsList; let index = index">
+      <img mat-card-img [src]="song.coverImageUrl">
+      <mat-card-content>
+        <audio controls [id]="index">
+          <source [src]="song.previewUrl" type="audio/ogg">
+          <source [src]="song.previewUrl" type="audio/mpeg">
+        </audio>
+        <div class="card-details">
+          <h4>{{ song.trackName }}</h4>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-icon class="like-btn" [ngClass]="{'highlight-like-btn':song.liked}"
+          (click)="likeSong(song);  song.liked = !song.liked">thumb_up</mat-icon>
+        <button mat-button color="primary" (click)="pauseSong()">PAUSE</button>
+        <button mat-flat-button color="primary" (click)="playSong(song)">PLAY</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
